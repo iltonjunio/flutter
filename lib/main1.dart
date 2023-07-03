@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(const App());
@@ -11,7 +12,10 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BaseApp',
-      theme: ThemeData.dark(),
+      theme: ThemeData.dark(
+        // brightness: Brightness.dark
+        // primaryswat
+      ),
       debugShowCheckedModeBanner: false,
       home: const Home(),
     );
@@ -54,30 +58,60 @@ final TextEditingController _anocontroller = TextEditingController();
                     decoration: const InputDecoration(
                       labelText: "Titulo da música",
                     ),
+                    validator: (value){
+                      if (value!.isEmpty){
+                        return "Campo obrigatório";
+                      }
+                      return null;
+                    },
                   ),
                    TextFormField(
                     controller: _duracaocontroller,
                     decoration: const InputDecoration(
                       labelText: "Duração da música",
                     ),
+                    validator: (value){
+                      if (value!.isEmpty){
+                        return "Campo obrigatório";
+                      }
+                      return null;
+                    },
                   ),
                    TextFormField(
                     controller: _generocontroller,
                     decoration: const InputDecoration(
                       labelText: "Gênero",
                     ),
+                    validator: (value){
+                      if (value!.isEmpty){
+                        return "Campo obrigatório";
+                      }
+                      return null;
+                    },
                   ),
                    TextFormField(
                     controller: _artistacontroller,
                     decoration: const InputDecoration(
                       labelText: "Artista",
                     ),
+                    validator: (value){
+                      if (value!.isEmpty){
+                        return "Campo obrigatório";
+                      }
+                      return null;
+                    },
                   ),
                    TextFormField(
                     controller: _albumcontroller,
                     decoration: const InputDecoration(
                       labelText: "Álbum",
                     ),
+                    validator: (value){
+                      if (value!.isEmpty){
+                        return "Campo obrigatório";
+                      }
+                      return null;
+                    },
                   ),
                    TextFormField(
                     controller: _anocontroller,
@@ -85,13 +119,32 @@ final TextEditingController _anocontroller = TextEditingController();
                     decoration: const InputDecoration(
                       labelText: "Ano Lançamento",
                     ),
+                    validator: (value){
+                      if (value!.isEmpty){
+                        return "Campo obrigatório";
+                      }
+                      return null;
+                    },
+                  ),
+                  ElevatedButton(
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()){
+                        debugPrint ("Música cadastrada com sucesso!");
+                        Fluttertoast.showToast(
+                          msg:"Música cadastrada com sucesso", 
+                          gravity: ToastGravity.CENTER_LEFT,
+                          backgroundColor: Colors.blue,
+                          );
+                      }
+                      
+                    }, 
+                    child: const Text ("Cadastrar")
                   ),
                 ],
               ),
             ),
           ),
         ) ,
-        ),
       ),
     );
   }
